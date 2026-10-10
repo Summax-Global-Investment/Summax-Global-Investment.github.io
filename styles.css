@@ -1,0 +1,371 @@
+/* Summax Global Investment, Quarto-compatible rebuild */
+:root {
+  --ink: #18201f;
+  --muted: #63706d;
+  --paper: #f3f1eb;
+  --surface: #fbfaf7;
+  --line: #d8d8cf;
+  --accent: #d86632;
+  --accent-dark: #a64221;
+  --deep: #1c302c;
+  --max: 1240px;
+  --radius: 2px;
+  /* One gutter drives the nav and every top-level content block, so their
+     left and right edges line up at every viewport width. */
+  --gutter: max(1.5rem, 5vw, calc((100% - var(--max)) / 2));
+  --section: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+/* Each page carries its own hero heading; Quarto's title block is redundant. */
+#title-block-header { display: none; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+  line-height: 1.6;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .24;
+
+  background-size: 5px 5px;
+  mix-blend-mode: multiply;
+}
+.navbar {
+  min-height: 72px;
+  padding: 0 5vw;
+  background: rgba(243,241,235,.94) !important;
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+.navbar-brand img { width: 76px; max-height: 48px; object-fit: contain; }
+.navbar-nav .nav-link { color: var(--ink) !important; font-size: .82rem; letter-spacing: .04em; }
+.navbar-nav .nav-link:hover { color: var(--accent-dark) !important; }
+.navbar .navbar-nav:last-child .nav-link {
+  background: var(--deep);
+  color: #fff !important;
+  padding: .7rem 1rem;
+  border-radius: var(--radius);
+}
+#quarto-content { padding: 0; }
+main.content { max-width: none; padding: 0; }
+/* One gutter for every top-level block. Direct body-child selectors mean
+   nested grids (e.g. .team-grid inside .team-layout) fill their parent
+   instead of being inset a second time. */
+body > .hero,
+body > .intro-band,
+body > .approach-strip,
+body > .section-heading,
+body > .services-grid,
+body > .project-grid,
+body > .project-detail,
+body > .team-layout,
+body > .contact-panel,
+body > .page-shell,
+body > footer {
+  margin-inline: var(--gutter);
+}
+/* The markdown section headings carry the anchor ids; .section-heading holds
+   the visible heading. Kept in the accessibility tree, hidden visually. */
+body > h2#services,
+body > h2#projects,
+body > h2#team {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+.hero {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  grid-template-columns: .82fr 1.18fr;
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: center;
+ 
+}
+.management-toggle {
+    display: block;
+   
+    cursor: pointer;
+       display: inline-block; 
+   padding: .9rem 1.1rem;
+   text-decoration: none; 
+  
+}
+
+.management-description {
+    display: none;
+    margin-top: 15px;
+    line-height: 1.7;
+  
+    text-align: left;
+}
+
+.management-description.show {
+    display: block;
+}
+.approach-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.approach-strip div { min-height: 96px; padding: 1.25rem 1.4rem; display: grid; grid-template-columns: 42px 1fr; gap: .7rem; align-items: center; border-right: 1px solid var(--line); }
+.approach-strip div:last-child { border-right: 0; }
+.approach-strip strong { color: var(--accent-dark); font-size: .78rem; letter-spacing: .08em; }
+.approach-strip span { max-width: 20ch; font-size: .88rem; }
+
+.kicker, .section-index {
+  color: white !important;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.service-number { color: brown !important; }
+.hero h1 {
+  margin: 1rem 0 1.35rem;
+  max-width: 9ch;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 400;
+  letter-spacing: -.065em;
+  line-height: .92;
+}
+/* The brand lockup now owns the whole left column, set large enough that the
+   "GLOBAL INVESTMENT LTD" line under the name still reads - it only becomes
+   legible above roughly 250px wide, below which it is a smudge. */
+.hero-logo { display: flex; align-items: center; }
+.hero-logo img { display: block; width: clamp(210px, 30vw, 420px); height: auto; }
+.hero-copy > p:not(.kicker) { max-width: 40ch; color: var(--muted); font-size: 1.06rem; }
+.hero-actions { display: flex; align-items: center; gap: 1.3rem; margin: 2rem 0 3.2rem; flex-wrap: wrap; }
+.button { 
+   display: inline-block; 
+   padding: .9rem 1.1rem;
+   text-decoration: none; 
+   font-weight: 700; 
+
+   }
+
+.button-primary {  
+    background: #000000;
+    color: white; 
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+    }
+.button-primary:hover {
+    background: brown !important;
+    background-color: brown !important;
+    color: #fff !important;
+}
+.text-link { color: var(--ink); text-decoration: none; font-weight: 700; }
+.text-link:hover { color: var(--accent-dark); }
+.hero-note { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: baseline; border-top: 1px solid var(--line); padding-top: 1rem; font-size: .78rem; color: var(--muted); }
+.hero-note strong { color: var(--ink); font-size: 1.1rem; }
+.intro-band { display: grid; grid-template-columns: 110px 1fr; gap: 1.5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 5rem 0; }
+.intro-band h2, .section-heading h2, .project-detail h2, .team-intro h2, .contact-panel h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 4vw, 4.5rem); font-weight: 400; letter-spacing: -.05em; line-height: .98; }
+.intro-band p, .section-heading p, .project-detail p, .team-intro p, .contact-panel p { max-width: 54ch; color: var(--muted); }
+/* Anchor targets must clear the sticky nav: 72px on desktop, ~111px once
+   the phone layout stacks it onto two rows. */
+:where(h1, h2, h3, section, div)[id] { scroll-margin-top: 7rem; }
+@media (max-width: 620px) { :where(h1, h2, h3, section, div)[id] { scroll-margin-top: 9.5rem; } }
+.section-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-bottom: 3rem; padding-block-start: var(--section); }
+.services-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+.service-feature { background: var(--deep); color: #f8f4ec; padding: 3rem; min-height: 310px; }
+.service-feature .service-number { color: #f0a16f; }
+.service-feature h3 { max-width: 7ch; margin: 3.5rem 0 1rem; font-family: Georgia, "Times New Roman", serif; font-size: 3rem; font-weight: 400; line-height: .95; }
+.service-feature p { max-width: 32ch; color: #c4d0ca; }
+.service-list { border-top: 1px solid var(--line); }
+.service-list div { display: grid; grid-template-columns: 70px 1fr; gap: 1rem; align-items: center; min-height: 68px; border-bottom: 1px solid var(--line); }
+.service-list strong { color: var(--accent-dark); font-size: .76rem; letter-spacing: .1em; }
+.project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; align-items: start; }
+.project-card { grid-column: span 4; background: var(--surface); }
+.project-card-wide { grid-column: span 8; }
+.project-card-tall { grid-column: span 4; }
+.project-card img { width: 100%; height: 245px; object-fit: cover; display: block; filter: saturate(.8); transition: transform .45s ease, filter .45s ease; }
+.project-card-wide img { height: 390px; }
+.project-card-tall img { height: 390px; }
+.project-card:hover img { transform: scale(1.015); filter: saturate(1); }
+.project-copy { padding: 1.1rem 1.15rem 1.3rem; }
+.project-copy h3 { margin: 0 0 .15rem; font-size: 1.05rem; font-weight: 700; }
+.project-copy p, .project-copy span { margin: 0; color: var(--muted); font-size: .82rem; }
+.project-copy span { display: block; margin-top: .65rem; color: var(--accent-dark); }
+.project-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: var(--section); padding: 3rem 0; }
+.project-detail .kicker { display: block; margin-bottom: 1rem; }
+.team-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 4rem; align-items: start; padding-block-start: var(--section); }
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.person-card { background: var(--surface); border-radius: 2px; }
+.person-card img { display: block; border-radius: 2px; width: 100%; height: 330px; object-fit: cover; object-position: top; filter: grayscale(.12); }
+.person-card h3, .person-card p { margin: 1rem 1.1rem 0; }
+.person-card p { padding-bottom: 1.2rem; color: var(--muted); font-size: .84rem; }
+.contact-panel { display: grid; grid-template-columns: 1.2fr .8fr; gap: 3rem; align-items: end; margin-top: var(--section); padding: 3rem; background: black; color: #fff; }
+.contact-panel .kicker, .contact-panel p { color: #ffe1cf; }
+.contact-panel h2 { max-width: 8ch; }
+.contact-details { display: grid; gap: .7rem; justify-items: start; }
+.contact-details a, .contact-details span { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.45); padding-bottom: .2rem; }
+footer { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding-block: 3rem; margin-top: var(--section); color: var(--muted); font-size: .75rem; border-top: 1px solid var(--line); }
+footer img { width: 92px; height: auto; }
+footer span:nth-child(2) { margin-right: auto; }
+@media (max-width: 850px) {
+  .hero { grid-template-columns: 1fr; padding-top: 3.5rem; }
+  .hero h1 { max-width: 10ch; font-size: clamp(3.5rem, 15vw, 6rem); }
+  .hero-logo img { width: clamp(170px, 46vw, 260px); }
+  .intro-band, .section-heading, .services-grid, .project-detail, .team-layout, .contact-panel { grid-template-columns: 1fr; }
+  .services-grid { gap: 2rem; }
+  .approach-strip { grid-template-columns: 1fr; }
+  .approach-strip div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .approach-strip div:last-child { border-bottom: 0; }
+  .project-card, .project-card-wide, .project-card-tall { grid-column: span 6; }
+  .project-card-wide img, .project-card-tall img { height: 300px; }
+  .contact-panel { padding: 2rem; }
+}
+@media (max-width: 560px) {
+  .navbar { padding: 0 1rem; }
+  .navbar-brand img { width: 62px; }
+  .hero { min-height: auto; padding: 3rem 0 4rem; }
+  .hero h1 { font-size: 3.65rem; }
+  .intro-band { padding: 3rem 0; }
+  .section-heading { margin-bottom: 2rem; }
+  .service-feature { padding: 2rem; }
+  .project-card, .project-card-wide, .project-card-tall { grid-column: span 12; }
+  .project-card img, .project-card-wide img, .project-card-tall img { height: 250px; }
+  .team-grid { grid-template-columns: 1fr; }
+  .person-card img { height: 310px; }
+  footer { align-items: flex-start; flex-wrap: wrap; }
+  footer span:nth-child(2) { margin-right: 0; width: 100%; order: 3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .project-card img { transition: none; }
+}
+
+/* Shared site navigation */
+.site-nav { width: 100%; min-height: 72px; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 2rem; background: rgba(243,241,235,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); position: sticky; top: 0; z-index: 5; }
+.site-nav-brand { display: flex; align-items: center; }
+.site-nav-brand img { display: block; height: 27px; width: auto; }
+.site-nav-links { display: flex; align-items: center; gap: 1.6rem; }
+.site-nav-links a { color: var(--ink); text-decoration: none; font-size: .82rem; letter-spacing: .04em; transition: color 0.3s ease; }
+.site-nav-links a:hover { color: brown !important;  }
+.site-nav-links .site-nav-cta {
+     background: black;
+     color: #fff; 
+     padding: .7rem 1rem;
+     border-radius: 4px;
+     transition: background-color 0.3s ease, color 0.3s ease;
+     }
+.site-nav-links .site-nav-cta:hover {
+     background: brown;
+     color: #fff; 
+     padding: .7rem 1rem;
+     border-radius: 4px;
+     color: white !important;
+     }
+
+
+/* Inner pages */
+.page-shell { padding-bottom: 1rem; }
+.page-hero { max-width: 850px; padding-block: var(--section) clamp(3rem, 6vw, 4.5rem); }
+.page-hero h1 { max-width: 10ch; margin: 1rem 0 1.4rem; font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 400; letter-spacing: -.065em; line-height: .93; }
+.page-hero p { max-width: 45ch; color: var(--muted); font-size: 1.08rem; }
+.page-hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; max-width: none; }
+.page-hero-split > p { margin-bottom: .7rem; }
+.about-statement { display: grid; grid-template-columns: 110px 1fr; gap: 1.5rem; padding: 4.5rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.about-statement h2, .about-columns h2 { max-width: 14ch; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 4vw, 4.2rem); font-weight: 400; letter-spacing: -.05em; line-height: .98; }
+.about-statement p { max-width: 58ch; color: var(--muted); }
+.about-objectives { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-block: var(--section) 0; }
+.about-objectives h2 { max-width: 12ch; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 4vw, 4.2rem); font-weight: 400; letter-spacing: -.05em; line-height: .98; }
+.about-objectives p { max-width: 58ch; color: var(--muted); }
+.audience-note { display: grid; gap: .35rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.audience-note strong { color: var(--ink); }
+.audience-note span { font-size: .86rem; }
+
+.about-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-block: var(--section); }
+.about-services { border-top: 1px solid var(--line); }
+.about-services div { padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+.about-services strong { font-size: 1.05rem; }
+.about-services p { margin: .25rem 0 0; color: var(--muted); font-size: .88rem; }
+.archive-feature { margin: 0 0 3rem; }
+.archive-feature img { display: block; width: 100%; height: clamp(300px, 52vh, 560px); object-fit: cover; }
+.archive-feature figcaption { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; padding: .9rem 0 0; }
+.archive-feature strong { font-size: 1.05rem; }
+.archive-feature span { color: var(--muted); font-size: .85rem; }
+.archive-group { padding: 3.5rem 0 0; margin-top: 3.5rem; border-top: 1px solid var(--line); }
+.archive-group-head { display: grid; grid-template-columns: 1fr auto auto; gap: .35rem 1.5rem; align-items: baseline; margin-bottom: 1.5rem; }
+.archive-group-head h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.6rem, 2.6vw, 2.4rem); font-weight: 400; letter-spacing: -.03em; }
+.archive-group-head > span { color: var(--muted); font-size: .82rem; }
+.archive-group-head .count { color: var(--accent-dark); font-variant-numeric: tabular-nums; }
+/* One uniform grid: every card is exactly the same size, so the page reads as
+   an ordered catalogue rather than a ragged collage. The archive mixes 35
+   landscape and 18 portrait photos, and the frame is square because that is
+   the shape this set can actually carry: a 3:2 landscape frame (the shape
+   arabcont.com uses) would leave the tallest portrait showing only 35% of its
+   height, while a square frame keeps 45 of the 53 photos within a quarter of
+   their full height. Portraits hang from the top so heads stay in frame;
+   landscapes sit centred. */
+.source-archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.source-archive-card { margin: 0; background: var(--surface); }
+.source-archive-card img {
+  display: block; width: 100%; aspect-ratio: 1 / 1; height: auto;
+  object-fit: cover; object-position: center; filter: saturate(.82);
+}
+.source-archive-card figcaption { padding: .75rem .85rem .95rem; }
+.source-archive-card strong { font-size: .83rem; font-weight: 600; line-height: 1.25; }
+/* The Management portraits are the only photos where a face fills the frame,
+   so they hang from the top edge rather than the centre. */
+.archive-group--people .source-archive-card img { object-position: center top; }
+
+/* Touch devices get 44px-tall targets; phones also swap the long CTA label
+   for a short one and stack the bar, so it still fits at 320px. */
+.cta-short { display: none; }
+@media (hover: none) {
+  .site-nav-links a { display: flex; align-items: center; min-height: 44px; padding-inline: .6rem; }
+  a[href^="tel:"], a[href^="mailto:"], .text-link { display: inline-flex; align-items: center; min-height: 44px; }
+}
+/* The brand, three links and the CTA need 318px together - more than a 320px
+   phone has - so below 620px the links drop to their own full-width row. */
+@media (max-width: 620px) {
+  .site-nav { flex-wrap: wrap; gap: 0; row-gap: .2rem; padding-block: .45rem; }
+  .site-nav-brand { flex: 0 0 auto; }
+  .site-nav-links { flex: 1 1 100%; justify-content: space-between; gap: 0; }
+  .site-nav-links a { padding-inline: .5rem; }
+  .cta-full {
+     display: none;
+      
+  }
+  .cta-short { display: inline; }
+  
+  .site-nav-cta { padding-inline: .7rem !important; }
+}
+
+@media (max-width: 850px) {
+  .page-hero-split, .about-columns, .about-objectives { grid-template-columns: 1fr; gap: 1.5rem; }
+  .archive-group-head { grid-template-columns: 1fr auto; }
+  .source-archive-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .page-hero { padding-block: 3.5rem 3rem; }
+  .page-hero h1 { font-size: 3.65rem; }
+  .source-archive-grid { grid-template-columns: 1fr; }
+  .archive-group-head { grid-template-columns: 1fr; gap: .2rem; }
+  .about-statement { grid-template-columns: 1fr; padding: 3rem 0; }
+  .about-columns { padding: 4.5rem 0; }
+  .service-feature h3 { font-size: 2.3rem; }
+}
+/* Narrow phones: keep the display type inside the 320px content box. */
+@media (max-width: 380px) {
+  .hero h1, .page-hero h1 { font-size: 3rem; }
+  .site-nav-brand img { height: 23px; }
+  .site-nav-links a { font-size: .78rem; }
+}
+/* Mobile browsers size 100vh to the largest possible viewport, so a
+   full-height hero is taller than the visible area until the user scrolls.
+   dvh tracks the real viewport; vh above stays as the fallback. */
+@supports (height: 100dvh) {
+  @media (min-width: 561px) { .hero { min-height: calc(100dvh - 72px); } }
+  }
