@@ -191,6 +191,47 @@ body > h2#team {
 .service-list { border-top: 1px solid var(--line); }
 .service-list div { display: grid; grid-template-columns: 70px 1fr; gap: 1rem; align-items: center; min-height: 68px; border-bottom: 1px solid var(--line); }
 .service-list strong { color: var(--accent-dark); font-size: .76rem; letter-spacing: .1em; }
+/* TABLETS */
+@media (max-width: 900px) {
+
+    .project-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .project-card,
+    .project-card-wide,
+    .project-card-tall {
+        grid-column: span 3;
+    }
+
+    .project-card img,
+    .project-card video {
+        height: 280px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .project-card,
+    .project-card-wide,
+    .project-card-tall {
+        grid-column: 1 / -1;
+    }
+
+    .project-card img,
+    .project-card video {
+        height: 240px;
+    }
+}
+
+
 .project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; align-items: start; }
 .project-card { grid-column: span 4; background: var(--surface); }
 .project-card-wide { grid-column: span 8; }
@@ -199,6 +240,7 @@ body > h2#team {
 .project-card-wide img { height: 390px; }
 .project-card-tall img { height: 390px; }
 .project-card:hover img { transform: scale(1.015); filter: saturate(1); }
+.project-card video { width: 100%; height: 235px; object-fit: cover; display: block; filter: saturate(.8); transition: transform .45s ease, filter .45s ease; }
 .project-copy { padding: 1.1rem 1.15rem 1.3rem; }
 .project-copy h3 { margin: 0 0 .15rem; font-size: 1.05rem; font-weight: 700; }
 .project-copy p, .project-copy span { margin: 0; color: var(--muted); font-size: .82rem; }
